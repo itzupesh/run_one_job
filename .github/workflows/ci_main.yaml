@@ -1,0 +1,11 @@
+name: test
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  dummy-job:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Setting up workflow"
