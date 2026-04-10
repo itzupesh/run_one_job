@@ -1,19 +1,20 @@
-name: test branch
+name: testing dispatcher
 
 on:
-  push:
   workflow_dispatch:
-    inputs:
-      run_stage_1:
-        description: 'Run Stage 1 (Build)'
-        required: true
-        type: boolean
-        default: true  # Will be checked by default
-      run_stage_2:
-        description: 'Run Stage 2 (Deploy)'
-        required: true
-        type: boolean
-        default: false # Will be unchecked by default
+  push:
+    branches: ['test']
+    # inputs:
+    #   run_stage_1:
+    #     description: 'Run Stage 1 (Build)'
+    #     required: true
+    #     type: boolean
+    #     default: true  # Will be checked by default
+    #   run_stage_2:
+    #     description: 'Run Stage 2 (Deploy)'
+    #     required: true
+    #     type: boolean
+    #     default: false # Will be unchecked by default
 
 jobs:
   # --- STAGE 1 ---
