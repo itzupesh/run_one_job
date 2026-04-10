@@ -20,7 +20,7 @@ jobs:
   stage_1_build:
     name: Stage 1 Job
     # This job ONLY runs if the 'run_stage_1' checkbox is checked
-    if: ${{ inputs.run_stage_1 }}
+    if: ${{ inputs.run_stage_1 || github.event_name == 'push'  }}
     runs-on: ubuntu-latest
     steps:
       - name: Execute Build
@@ -30,7 +30,7 @@ jobs:
   stage_2_deploy:
     name: Stage 2 Job
     # This job ONLY runs if the 'run_stage_2' checkbox is checked
-    if: ${{ inputs.run_stage_2 }}
+    if: ${{ inputs.run_stage_2 || github.event_name == 'push' }}
     runs-on: ubuntu-latest
     steps:
       - name: Execute Deploy
