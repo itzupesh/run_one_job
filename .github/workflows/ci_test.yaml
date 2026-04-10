@@ -1,0 +1,26 @@
+name: Selective Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      job_to_run:
+        description: "Select job"
+        required: true
+        default: "stage1"
+        type: choice
+        options:
+          - stage1
+          - stage2
+
+jobs:
+  stage1:
+    if: ${{ github.event.inputs.job_to_run == 'stage1' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Stage 1 executed"
+
+  stage2:
+    if: ${{ github.event.inputs.job_to_run == 'stage2' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Stage 2 executed"
