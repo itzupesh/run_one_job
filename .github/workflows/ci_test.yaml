@@ -1,27 +1,36 @@
-name: Selective Pipeline
+name: test
 
 on:
-  push:
   workflow_dispatch:
     inputs:
-      job_to_run:
-        description: "Select job"
+      run_stage_1:
+        description: 'Run Stage 1 (Build)'
         required: true
-        default: "stage1"
-        type: choice
-        options:
-          - stage1
-          - stage2
+        type: boolean
+        default: true  # Will be checked by default
+      run_stage_2:
+        description: 'Run Stage 2 (Deploy)'
+        required: true
+        type: boolean
+        default: false # Will be unchecked by default
 
 jobs:
-  stage1:
-    if: ${{ github.event.inputs.job_to_run == 'stage1' }}
+  # --- STAGE 1 ---
+  stage_1_build:
+    name: Stage 1 Job
+    # This job ONLY runs if the 'run_stage_1' checkbox is checked
+    if: ${{ inputs.run_stage_1 }}
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Stage 1 executed"
+      - name: Execute Build
+        run: echo "Executing Stage 1..."
 
-  stage2:
-    if: ${{ github.event.inputs.job_to_run == 'stage2' }}
+  # --- STAGE 2 ---
+  stage_2_deploy:
+    name: Stage 2 Job
+    # This job ONLY runs if the 'run_stage_2' checkbox is checked
+    if: ${{ inputs.run_stage_2 }}
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Stage 2 executed"
+      - name: Execute Deploy
+        run: echo "Executing Stage 2..."
