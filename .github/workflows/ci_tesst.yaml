@@ -15,6 +15,11 @@ on:
         required: true
         type: boolean
         default: false # Will be unchecked by default
+      run_stage_3:
+        description: 'Run Stage 2 (Deploy)'
+        required: true
+        type: boolean
+        default: false # Will be unchecked by default
 
 jobs:
   # --- STAGE 1 ---
@@ -36,3 +41,12 @@ jobs:
     steps:
       - name: Execute Deploy
         run: echo "Executing Stage 2..."
+
+  stage_3_destroy:
+    name: Stage 3 Job
+    # This job ONLY runs if the 'run_stage_2' checkbox is checked
+    if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.run_stage_3) }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Execute destroy
+        run: echo "Executing Stage 3..."
