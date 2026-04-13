@@ -16,7 +16,7 @@ on:
         type: boolean
         default: false # Will be unchecked by default
       run_stage_3:
-        description: 'Run Stage 2 (Deploy)'
+        description: 'Run Stage 3 (Destroy)'
         required: true
         type: boolean
         default: false # Will be unchecked by default
