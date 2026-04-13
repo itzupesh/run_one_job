@@ -9,7 +9,7 @@ on:
         description: 'Run Stage 1 (Build)'
         required: true
         type: boolean
-        default: true  # Will be checked by default
+        default: false  # Will be checked by default
       run_stage_2:
         description: 'Run Stage 2 (Deploy)'
         required: true
