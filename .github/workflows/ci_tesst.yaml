@@ -1,8 +1,8 @@
-name: tester2 dispatcher 
+name: tester3 dispatcher 
  
 on:
   push:
-    branches: ['dev']
+    branches: ['main']
   workflow_dispatch:
     inputs:
       run_stage_1:
