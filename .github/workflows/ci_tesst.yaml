@@ -39,7 +39,7 @@ jobs:
         run: echo "Executing Stage 1..."
 
       - name: Print Input
-        run: echo "Input value: ${{ github.event.inputs.test_input }}"
+        run: 'echo "Input value: ${{ github.event.inputs.test_input }}"'
 
   # --- STAGE 2 ---
   stage_2_deploy:
@@ -53,7 +53,7 @@ jobs:
         run: echo "Executing Stage 2..."
 
       - name: Print Input
-        run: echo "Input value: ${{ github.event.inputs.test_input }}"
+        run: 'echo "Input value: ${{ github.event.inputs.test_input }}"'
 
   # --- STAGE 3 ---
   stage_3_destroy:
@@ -67,4 +67,4 @@ jobs:
         run: echo "Executing Stage 3..."
 
       - name: Print Input
-        run: echo "Input value: ${{ github.event.inputs.test_input }}"
+        run: 'echo "Input value: ${{ github.event.inputs.test_input }}"'
