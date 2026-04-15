@@ -30,7 +30,9 @@ jobs:
   # --- STAGE 1 ---
   stage_1_build:
     name: Stage 1 Job
-    if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.run_stage_1 == 'true') }}
+    if: >
+      github.event_name == 'push' ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.run_stage_1 == 'true')
     runs-on: ubuntu-latest
     steps:
       - name: Execute Build
@@ -42,7 +44,9 @@ jobs:
   # --- STAGE 2 ---
   stage_2_deploy:
     name: Stage 2 Job
-    if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.run_stage_2 == 'true') }}
+    if: >
+      github.event_name == 'push' ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.run_stage_2 == 'true')
     runs-on: ubuntu-latest
     steps:
       - name: Execute Deploy
@@ -54,7 +58,9 @@ jobs:
   # --- STAGE 3 ---
   stage_3_destroy:
     name: Stage 3 Job
-    if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.run_stage_3 == 'true') }}
+    if: >
+      github.event_name == 'push' ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.run_stage_3 == 'true')
     runs-on: ubuntu-latest
     steps:
       - name: Execute Destroy
