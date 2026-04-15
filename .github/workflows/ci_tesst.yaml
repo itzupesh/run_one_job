@@ -25,6 +25,14 @@ on:
         required: false
         type: string
         default: 'hello-world'
+      test_choice:
+        description: 'choose an option'
+        required: false 
+        type: choice
+        options:
+          - choice 1
+          - choice 2
+          - choice 3
 
 jobs:
   # --- STAGE 1 ---
@@ -40,6 +48,8 @@ jobs:
 
       - name: Print Input
         run: 'echo "Input value: ${{ github.event.inputs.test_input }}"'
+      - name: Print choice
+        run: 'echo "Input value: ${{ github.event.inputs.test_choice }}"'
 
   # --- STAGE 2 ---
   stage_2_deploy:
@@ -55,6 +65,9 @@ jobs:
       - name: Print Input
         run: 'echo "Input value: ${{ github.event.inputs.test_input }}"'
 
+      - name: Print choice
+        run: 'echo "Input value: ${{ github.event.inputs.test_choice }}"'
+
   # --- STAGE 3 ---
   stage_3_destroy:
     name: Stage 3 Job
@@ -68,3 +81,5 @@ jobs:
 
       - name: Print Input
         run: 'echo "Input value: ${{ github.event.inputs.test_input }}"'
+      - name: Print choice
+        run: 'echo "Input value: ${{ github.event.inputs.test_choice }}"'
