@@ -2,7 +2,7 @@ name: main dispatcher
  
 on:
   push:
-    branches: ['main']
+    branches: ['main','dev']
   workflow_dispatch:
     inputs:
       run_stage_1:
