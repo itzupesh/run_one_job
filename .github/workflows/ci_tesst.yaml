@@ -1,4 +1,4 @@
-name: tester3 dispatcher 
+name: main dispatcher 
  
 on:
   push:
@@ -9,44 +9,56 @@ on:
         description: 'Run Stage 1 (Build)'
         required: true
         type: boolean
-        default: false  # Will be checked by default
+        default: false
       run_stage_2:
         description: 'Run Stage 2 (Deploy)'
         required: true
         type: boolean
-        default: false # Will be unchecked by default
+        default: false
       run_stage_3:
         description: 'Run Stage 3 (Destroy)'
         required: true
         type: boolean
-        default: false # Will be unchecked by default
+        default: false
+      test_input:
+        description: 'Sample string input'
+        required: false
+        type: string
+        default: 'hello-world'
 
 jobs:
   # --- STAGE 1 ---
   stage_1_build:
     name: Stage 1 Job
-    # This job ONLY runs if the 'run_stage_1' checkbox is checked
     if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.run_stage_1) }}
     runs-on: ubuntu-latest
     steps:
       - name: Execute Build
         run: echo "Executing Stage 1..."
+      
+      - name: Print Input
+        run: echo "Input value: ${{ inputs.test_input }}"
 
   # --- STAGE 2 ---
   stage_2_deploy:
     name: Stage 2 Job
-    # This job ONLY runs if the 'run_stage_2' checkbox is checked
     if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.run_stage_2) }}
     runs-on: ubuntu-latest
     steps:
       - name: Execute Deploy
         run: echo "Executing Stage 2..."
+      
+      - name: Print Input
+        run: echo "Input value: ${{ inputs.test_input }}"
 
+  # --- STAGE 3 ---
   stage_3_destroy:
     name: Stage 3 Job
-    # This job ONLY runs if the 'run_stage_2' checkbox is checked
     if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.run_stage_3) }}
     runs-on: ubuntu-latest
     steps:
-      - name: Execute destroy
+      - name: Execute Destroy
         run: echo "Executing Stage 3..."
+      
+      - name: Print Input
+        run: echo "Input value: ${{ inputs.test_input }}"
