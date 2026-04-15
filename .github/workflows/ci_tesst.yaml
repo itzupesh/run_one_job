@@ -1,8 +1,8 @@
-name: main dispatcher 
- 
+name: main dispatcher
+
 on:
   push:
-    branches: ['main','dev']
+    branches: ['main', 'dev']
   workflow_dispatch:
     inputs:
       run_stage_1:
@@ -30,35 +30,35 @@ jobs:
   # --- STAGE 1 ---
   stage_1_build:
     name: Stage 1 Job
-    if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.run_stage_1) }}
+    if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.run_stage_1 == 'true') }}
     runs-on: ubuntu-latest
     steps:
       - name: Execute Build
         run: echo "Executing Stage 1..."
-      
+
       - name: Print Input
-        run: echo "Input value: ${{ inputs.test_input }}"
+        run: echo "Input value: ${{ github.event.inputs.test_input }}"
 
   # --- STAGE 2 ---
   stage_2_deploy:
     name: Stage 2 Job
-    if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.run_stage_2) }}
+    if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.run_stage_2 == 'true') }}
     runs-on: ubuntu-latest
     steps:
       - name: Execute Deploy
         run: echo "Executing Stage 2..."
-      
+
       - name: Print Input
-        run: echo "Input value: ${{ inputs.test_input }}"
+        run: echo "Input value: ${{ github.event.inputs.test_input }}"
 
   # --- STAGE 3 ---
   stage_3_destroy:
     name: Stage 3 Job
-    if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.run_stage_3) }}
+    if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.run_stage_3 == 'true') }}
     runs-on: ubuntu-latest
     steps:
       - name: Execute Destroy
         run: echo "Executing Stage 3..."
-      
+
       - name: Print Input
-        run: echo "Input value: ${{ inputs.test_input }}"
+        run: echo "Input value: ${{ github.event.inputs.test_input }}"
