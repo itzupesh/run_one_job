@@ -1,11 +1,36 @@
-name: main dispatcher
+name: main dispatcher 
  
 on:
   push:
     branches: ['main']
   workflow_dispatch:
-
+    inputs:
+      run_stage_1:
+        description: 'Run Stage 1 (Build)'
+        required: true
+        type: boolean
+        default: false
+      run_stage_2:
+        description: 'Run Stage 2 (Deploy)'
+        required: true
+        type: boolean
+        default: false
 jobs:
-  stage_1:
+  # --- STAGE 1 ---
+  stage_1_build:
+    name: Stage 1 Job
+    if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.run_stage_1) }}
     runs-on: ubuntu-latest
-    
+    steps:
+      - name: Execute Build
+        run: echo "Executing Stage 1..."
+
+  # --- STAGE 2 ---
+  stage_2_deploy:
+    name: Stage 2 Job
+    if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.run_stage_2) }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Execute Deploy
+        run: echo "Executing Stage 2..."
+  
